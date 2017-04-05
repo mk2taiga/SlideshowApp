@@ -10,16 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
+//    ボタンのOutlet
+    @IBOutlet weak var slideUP: UIButton!
+    @IBOutlet weak var slideBack: UIButton!
+    @IBOutlet weak var startStop: UIButton!
 //    imageviewのOutlet
     @IBOutlet weak var imageView: UIImageView!
     var timer: Timer!
     var image_num:Int = 0
 //    他のページからsegue出戻って来た時に呼ばれる
     @IBAction func unwind(segue: UIStoryboardSegue){
+        if self.timer == nil {
+        self.timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
+        }
     }
     
 //    表示する画像のメソッド
-    func desplayImage() {
+    func displayImage() {
         let imageArray = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg" ]
 //        条件分岐
         if image_num < 0 {
@@ -49,14 +56,13 @@ class ViewController: UIViewController {
 //    スライドを進める
     @IBAction func slideUp(_ sender: Any) {
         image_num += 1
-        desplayImage()
+        displayImage()
     }
     
 // 　スライドを戻す
     @IBAction func slideBack(_ sender: Any) {
         image_num -= 1
-        desplayImage()
-        
+        displayImage()
     }
     
 //    再生と停止
@@ -64,21 +70,33 @@ class ViewController: UIViewController {
 //        条件分岐でnilの時再生
         if self.timer == nil {
             self.timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
+//            ボタンをタップできないように
+            slideUP.isEnabled = false
+            slideBack.isEnabled = false
+//            ボタンの名前
+            startStop.setTitle("停止", for: .normal)
         }else{
 //            それ以外の時は停止
             self.timer.invalidate()
             self.timer = nil
+//            ボタンをタップできるように
+            slideUP.isEnabled = true
+            slideBack.isEnabled = true
+//            ボタンの名前
+            startStop.setTitle("再生", for: .normal)
         }
         
     }
 //    更新のたびに呼ばれるメソッド
     func nextImage(timer: Timer){
         image_num += 1
-        desplayImage()
+        displayImage()
     }
     
 //    画像を押した時に次のページに遷移する
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.timer.invalidate()
+        self.timer = nil
         // segueから遷移先のSecondViewControllerを取得する
         let vcSecond:SecondViewController = segue.destination as! SecondViewController
         vcSecond.imageNum = image_num

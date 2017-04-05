@@ -14,8 +14,8 @@ class SecondViewController: UIViewController {
     
     var imageNum:Int = 0
     
-//    画像ほゆ路のメソッド
-    func desplayImage() {
+//    画像表示のメソッド
+    func displayImage() {
         let imageArray = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg" ]
         //        条件分岐
         if imageNum < 0 {
@@ -33,7 +33,7 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        desplayImage()
+        displayImage()
             }
 
     override func didReceiveMemoryWarning() {

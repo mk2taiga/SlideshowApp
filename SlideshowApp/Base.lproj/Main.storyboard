@@ -36,8 +36,8 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzD-01-Pqx">
-                                <rect key="frame" x="154" y="400" width="67" height="30"/>
-                                <state key="normal" title="再生/停止"/>
+                                <rect key="frame" x="172" y="400" width="31" height="30"/>
+                                <state key="normal" title="再生"/>
                                 <connections>
                                     <action selector="startStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vbt-El-LzY"/>
                                 </connections>
@@ -79,6 +79,9 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="6D5-sy-9xv" id="0MD-kz-4Bz"/>
+                        <outlet property="slideBack" destination="zvj-PG-5IM" id="0Ft-u6-J1K"/>
+                        <outlet property="slideUP" destination="YhF-wo-zbV" id="Nzo-lu-7E4"/>
+                        <outlet property="startStop" destination="fzD-01-Pqx" id="JzB-2M-L13"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
