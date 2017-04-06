@@ -20,10 +20,6 @@ class ViewController: UIViewController {
     var image_num:Int = 0
 //    他のページからsegue出戻って来た時に呼ばれる
     @IBAction func unwind(segue: UIStoryboardSegue){
-        if self.timer != nil {
-            self.timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
-            
-        }
     }
     
 //    表示する画像のメソッド
@@ -97,7 +93,14 @@ class ViewController: UIViewController {
 //    画像を押した時に次のページに遷移する
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if self.timer != nil {
-        self.timer.invalidate()
+            // それ以外の時は停止
+            self.timer.invalidate()
+            self.timer = nil
+            // ボタンをタップできるように
+            slideUP.isEnabled = true
+            slideBack.isEnabled = true
+            // ボタンの名前
+            startStop.setTitle("再生", for: .normal)
         }
         // segueから遷移先のSecondViewControllerを取得する
         let vcSecond:SecondViewController = segue.destination as! SecondViewController
